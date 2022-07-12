@@ -1,5 +1,4 @@
 package description;
-
 public class ElementsOfOrderSecond {
     //Поле Когда привезти самокат
     //   .//input[@placeholder='* Когда привезти самокат']

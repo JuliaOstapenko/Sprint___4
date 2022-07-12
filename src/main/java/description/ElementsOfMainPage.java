@@ -1,8 +1,8 @@
 package description;
-
-
-
 public class ElementsOfMainPage {
+
+    //Куки
+    //id="rcc-confirm-button";
 
     //Вопрос 1: Сколько это стоит?
     //id="accordion__heading-0"
