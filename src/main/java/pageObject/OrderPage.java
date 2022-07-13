@@ -34,7 +34,7 @@ public void fillAddressField(String address) {
 
     public void chooseMetroStationField(String metroStation) {
         driver.findElement(metroStationField).click();
-        driver.findElement(By.xpath(".//input[@value = '" + metroStation + "']")).click();
+        driver.findElement(By.xpath(metroStation)).click();
     }
     public void fillTelephoneNumberField(String telephoneNumber) {
         driver.findElement(telephoneNumberField).sendKeys(telephoneNumber);
