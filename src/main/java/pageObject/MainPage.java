@@ -1,4 +1,4 @@
-package description.pageObject;
+package pageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -52,6 +52,15 @@ public class MainPage {
 
     public String getTextOfAnswer(By answer) {
         return driver.findElement(answer).getText();
+    }
+
+    public void clickOnOrderButtonInTheTop () {
+        driver.findElement(orderInTheTopButton).click();
+    }
+
+    public void clickOnOrderButtonInTheMiddle () {
+        driver.findElement(orderInTheMiddleButton).click();
+
     }
 
 
