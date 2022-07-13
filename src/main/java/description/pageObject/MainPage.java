@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 
 public class MainPage {
     private WebDriver driver;
+    private By cookieYes = By.id("rcc-confirm-button");
+    public static final String URL = "https://qa-scooter.praktikum-services.ru/";
     public static final By FIRST_QUESTION = By.id("accordion__heading-0");
     public static final By SECOND_QUESTION = By.id("accordion__heading-1");
     public static final By THIRD_QUESTION = By.id("accordion__heading-2");
@@ -26,27 +28,31 @@ public class MainPage {
     private By orderInTheTopButton = By.xpath(".//button[@class = 'Button_Button__ra12g']");
     private By orderInTheMiddleButton = By.xpath(".//button[@class = 'Button_Button__ra12g Button_UltraBig__UU3Lp']");
 
-    private By cookieYes = By.id("rcc-confirm-button");
-
-    public static final String EXPECTED_FIRST_ANSWER = "Сутки — 400 рублей. Оплата курьеру — наличными или картой.";
-
+    public static final String EXPECTED_TEXT_OF_FIRST_ANSWER = "Сутки — 400 рублей. Оплата курьеру — наличными или картой.";
+    public static final String EXPECTED_TEXT_OF_SECOND_ANSWER = "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.";
+    public static final String EXPECTED_TEXT_OF_THIRD_ANSWER = "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.";
+    public static final String EXPECTED_TEXT_OF_FOURTH_ANSWER = "Только начиная с завтрашнего дня. Но скоро станем расторопнее.";
+    public static final String EXPECTED_TEXT_OF_FIFTH_ANSWER = "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010.";
+    public static final String EXPECTED_TEXT_OF_SIXTH_ANSWER = "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.";
+    public static final String EXPECTED_TEXT_OF_SEVENTH_ANSWER = "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.";
+    public static final String EXPECTED_TEXT_OF_EIGHTH_ANSWER = "Да, обязательно. Всем самокатов! И Москве, и Московской области.";
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public void clickCookie() {
+        driver.findElement(cookieYes).click();
     }
 
     public void clickQuestion(By question) {
         driver.findElement(question).click();
     }
 
-    public void clickCookie() {
-        driver.findElement(cookieYes).click();
-    }
+
     public String getTextOfAnswer(By answer) {
         return driver.findElement(answer).getText();
     }
-
-
 
 
 }
