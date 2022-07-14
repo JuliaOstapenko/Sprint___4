@@ -1,23 +1,44 @@
 import model.OrderForm;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import pageObject.MainPage;
 import pageObject.OrderPage;
 
-
+@RunWith(Parameterized.class)
 public class MakeOrderTest extends BaseOfTest {
-    OrderForm orderForm = new OrderForm("", "", "",
-            "", "", "",
-            "", "", "");
+    private String name;
+    private String surname;
+    private String address;
+    private String metroStation;
+    private String telephoneNumber;
+    private String orderDate;
+    private String rentalPeriod;
+    private String scooterColour;
+    private String orderComment;
+
+    public MakeOrderTest (String name, String surname, String address,
+                     String metroStation, String telephoneNumber, String orderDate,
+                     String rentalPeriod, String scooterColour, String orderComment) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.metroStation = metroStation;
+        this.telephoneNumber = telephoneNumber;
+        this.orderDate = orderDate;
+        this.rentalPeriod = rentalPeriod;
+        this.scooterColour = scooterColour;
+        this.orderComment = orderComment;
+    }
     @Parameterized.Parameters
     public static Object[][] getData() {
         return new Object[][] {
-                {new OrderForm("Варвара", "Мешанина", "Москва, улица Товарная 24",
+                {"Варвара", "Мешанина", "Москва, улица Товарная 24",
                 ".//ul/li[@data-value = '2']", "88005553535", "15.07.2022",
-                ".//div[text() = 'трое суток']", "black", "Хочу красивый")},
-                {new OrderForm("Машуня", "Калинина", "Москва, улица Беговая 118",
+                ".//div[text() = 'трое суток']", "black", "Хочу красивый"},
+                {"Машуня", "Калинина", "Москва, улица Беговая 118",
                         ".//ul/li[@data-value = '9']", "89782223333", "15.06.2022",
-                        ".//div[text() = 'семеро суток']", "grey", "Могу только после шести")}
+                        ".//div[text() = 'семеро суток']", "grey", "Могу только после шести"}
         };
     }
 
@@ -29,11 +50,13 @@ public class MakeOrderTest extends BaseOfTest {
         mainPage.clickCookie();
         mainPage.clickOnOrderButtonInTheTop();
         OrderPage orderpage = new OrderPage(driver);
-        orderpage.fillNameField(orderForm.getName());
-        orderpage.fillSurnameField(orderForm.getSurname());
-        orderpage.fillAddressField(orderForm.getAddress());
-        orderpage.chooseMetroStationField(orderForm.getMetroStation());
-        orderpage.fillTelephoneNumberField(orderForm.getTelephoneNumber());
+        orderpage.fillNameField(name);
+        orderpage.fillSurnameField(surname);
+        orderpage.fillAddressField(address);
+        orderpage.chooseMetroStationField(metroStation);
+        orderpage.fillTelephoneNumberField(telephoneNumber);
+
+
 
     }
 }
