@@ -1,8 +1,12 @@
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import pageObject.MainPage;
 import pageObject.OrderPage;
+import pageObject.PopUpPage;
+
+import static org.hamcrest.CoreMatchers.containsString;
 
 @RunWith(Parameterized.class)
 public class MakeOrderTest extends BaseOfTest {
@@ -47,7 +51,7 @@ public class MakeOrderTest extends BaseOfTest {
     public void makeOrderWithTopOrderButtonTest() {
 
         driver.get(MainPage.URL);
-        new MainPage(driver)
+        String actualTextOfPlacedOrder = new MainPage(driver)
                 .clickCookie()
                 .clickOnBothOrderButtons(startingOrderButton)
                 .fillNameField(name)
@@ -61,10 +65,9 @@ public class MakeOrderTest extends BaseOfTest {
                 .clickScooterColourCheckbox(scooterColour)
                 .fillOrderCommentField(orderComment)
                 .clickButtonFinishOrder()
-                .clickOnButtonYes();
-
-
-
+                .clickOnButtonYes()
+                .getTextOfPlacedOrder();
+        MatcherAssert.assertThat(actualTextOfPlacedOrder, containsString(PopUpPage.EXPECTED_TEXT_OF_PLACED_ORDER));
 
     }
 }

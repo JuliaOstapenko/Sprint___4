@@ -17,6 +17,12 @@ public class PopUpPage {
         return this;
     }
 
+    public String getTextOfPlacedOrder() {
+        return driver.findElement(textOfPlacedOrder).getText();
+    }
+
+    public static final String EXPECTED_TEXT_OF_PLACED_ORDER = "Заказ оформлен";
+
 
 
 }
