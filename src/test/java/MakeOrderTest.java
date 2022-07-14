@@ -48,7 +48,7 @@ public class MakeOrderTest extends BaseOfTest {
     }
 
     @Test
-    public void makeOrderWithTopOrderButtonTest() {
+    public void makeOrderTest() {
 
         driver.get(MainPage.URL);
         String actualTextOfPlacedOrder = new MainPage(driver)
