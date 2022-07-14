@@ -13,54 +13,65 @@ private By metroStationField = By.xpath(".//input[@placeholder='* Станция
 private By telephoneNumberField = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
 private By nextOrderButton = By.xpath(".//button[@class ='Button_Button__ra12g Button_Middle__1CSJM' and text() = 'Далее']");
 private By orderDateField = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
-private By rentalPeriodField = By.xpath(".//div[@class='Dropdown-placeholder' and text() = '* Срок аренды']");
+private By rentalPeriodField = By.xpath(".//span[@class='Dropdown-arrow']");
 private By orderCommentField = By.xpath(".//input[@placeholder='Комментарий для курьера']");
 private By buttonFinishOrder = By.xpath(".//button[@class ='Button_Button__ra12g Button_Middle__1CSJM' and text() = 'Заказать']");
 
     public OrderPage(WebDriver driver) {
         this.driver = driver;
     }
-public void fillNameField(String name) {
+public OrderPage fillNameField(String name) {
     driver.findElement(nameField).sendKeys(name);
+    return this;
 }
 
-public void fillSurnameField(String surname) {
+public OrderPage fillSurnameField(String surname) {
     driver.findElement(surnameField).sendKeys(surname);
+    return this;
 }
 
-public void fillAddressField(String address) {
+public OrderPage fillAddressField(String address) {
     driver.findElement(addressField).sendKeys(address);
+    return this;
 }
 
-    public void chooseMetroStationField(String metroStation) {
+    public OrderPage chooseMetroStationField(String metroStation) {
         driver.findElement(metroStationField).click();
         driver.findElement(By.xpath(metroStation)).click();
+        return this;
     }
-    public void fillTelephoneNumberField(String telephoneNumber) {
+    public OrderPage fillTelephoneNumberField(String telephoneNumber) {
         driver.findElement(telephoneNumberField).sendKeys(telephoneNumber);
+        return this;
     }
 
-    public void clickNextOrderButton() {
+    public OrderPage clickNextOrderButton() {
     driver.findElement(nextOrderButton).click();
+    return this;
     }
 
-    public void fillOrderDateField(String orderDate) {
+    public OrderPage fillOrderDateField(String orderDate) {
     driver.findElement(orderDateField).sendKeys(orderDate);
+    return this;
     }
-    public void fillRentalPeriodField(String rentalPeriod) {
+    public OrderPage fillRentalPeriodField(String rentalPeriod) {
     driver.findElement(rentalPeriodField).click();
         driver.findElement(By.xpath(rentalPeriod)).click();
+        return this;
     }
 
-    public void clickScooterColourCheckbox(String scooterColour) {
+    public OrderPage clickScooterColourCheckbox(String scooterColour) {
     driver.findElement(By.id(scooterColour)).click();
+    return this;
     }
 
-    public void fillOrderCommentField(String orderComment) {
+    public OrderPage fillOrderCommentField(String orderComment) {
     driver.findElement(orderCommentField).sendKeys(orderComment);
+    return this;
     }
-    public void clickButtonFinishOrder() {
+    public PopUpPage clickButtonFinishOrder() {
     driver.findElement(buttonFinishOrder).click();
+    return new PopUpPage(driver);
     }
 
 }

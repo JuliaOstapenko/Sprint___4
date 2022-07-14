@@ -1,4 +1,3 @@
-import model.OrderForm;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -7,6 +6,7 @@ import pageObject.OrderPage;
 
 @RunWith(Parameterized.class)
 public class MakeOrderTest extends BaseOfTest {
+    private String startingOrderButton;
     private String name;
     private String surname;
     private String address;
@@ -17,9 +17,10 @@ public class MakeOrderTest extends BaseOfTest {
     private String scooterColour;
     private String orderComment;
 
-    public MakeOrderTest (String name, String surname, String address,
+    public MakeOrderTest (String startingOrderButton, String name, String surname, String address,
                      String metroStation, String telephoneNumber, String orderDate,
                      String rentalPeriod, String scooterColour, String orderComment) {
+        this.startingOrderButton = startingOrderButton;
         this.name = name;
         this.surname = surname;
         this.address = address;
@@ -33,12 +34,12 @@ public class MakeOrderTest extends BaseOfTest {
     @Parameterized.Parameters
     public static Object[][] getData() {
         return new Object[][] {
-                {"Варвара", "Мешанина", "Москва, улица Товарная 24",
+                {".//button[@class = 'Button_Button__ra12g']", "Варвара", "Мешанина", "Москва, улица Товарная 24",
                 ".//ul/li[@data-value = '2']", "88005553535", "15.07.2022",
                 ".//div[text() = 'трое суток']", "black", "Хочу красивый"},
-                {"Машуня", "Калинина", "Москва, улица Беговая 118",
-                        ".//ul/li[@data-value = '9']", "89782223333", "15.06.2022",
-                        ".//div[text() = 'семеро суток']", "grey", "Могу только после шести"}
+                {".//div[@class = 'Home_FinishButton__1_cWm']/button",
+                        "Машуня", "Калинина", "Москва, улица Беговая 118", ".//ul/li[@data-value = '9']",
+                        "89782223333", "15.06.2022", ".//div[text() = 'семеро суток']", "grey", "Могу только после шести"}
         };
     }
 
@@ -46,15 +47,22 @@ public class MakeOrderTest extends BaseOfTest {
     public void makeOrderWithTopOrderButtonTest() {
 
         driver.get(MainPage.URL);
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickCookie();
-        mainPage.clickOnOrderButtonInTheTop();
-        OrderPage orderpage = new OrderPage(driver);
-        orderpage.fillNameField(name);
-        orderpage.fillSurnameField(surname);
-        orderpage.fillAddressField(address);
-        orderpage.chooseMetroStationField(metroStation);
-        orderpage.fillTelephoneNumberField(telephoneNumber);
+        new MainPage(driver)
+                .clickCookie()
+                .clickOnBothOrderButtons(startingOrderButton)
+                .fillNameField(name)
+                .fillSurnameField(surname)
+                .fillAddressField(address)
+                .chooseMetroStationField(metroStation)
+                .fillTelephoneNumberField(telephoneNumber)
+                .clickNextOrderButton()
+                .fillOrderDateField(orderDate)
+                .fillRentalPeriodField(rentalPeriod)
+                .clickScooterColourCheckbox(scooterColour)
+                .fillOrderCommentField(orderComment)
+                .clickButtonFinishOrder()
+                .clickOnButtonYes();
+
 
 
 

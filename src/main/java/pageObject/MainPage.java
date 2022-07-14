@@ -1,7 +1,9 @@
 package pageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 
 public class MainPage {
@@ -16,17 +18,17 @@ public class MainPage {
     public static final By SIXTH_QUESTION = By.id("accordion__heading-5");
     public static final By SEVENTH_QUESTION = By.id("accordion__heading-6");
     public static final By EIGHTH_QUESTION = By.id("accordion__heading-7");
-    public static final By FIRST_ANSWER = By.id("accordion__panel-0");
-    public static final By SECOND_ANSWER = By.id("accordion__panel-1");
-    public static final By THIRD_ANSWER = By.id("accordion__panel-2");
-    public static final By FOURTH_ANSWER = By.id("accordion__panel-3");
-    public static final By FIFTH_ANSWER = By.id("accordion__panel-4");
-    public static final By SIXTH_ANSWER = By.id("accordion__panel-5");
-    public static final By SEVENTH_ANSWER = By.id("accordion__panel-6");
-    public static final By EIGHTH_ANSWER = By.id("accordion__panel-7");
+    public static final By FIRST_ANSWER = By.xpath(".//div[@id = 'accordion__panel-0']/p");
+    public static final By SECOND_ANSWER = By.xpath(".//div[@id = 'accordion__panel-1']/p");
+    public static final By THIRD_ANSWER = By.xpath(".//div[@id = 'accordion__panel-2']/p");
+    public static final By FOURTH_ANSWER = By.xpath(".//div[@id = 'accordion__panel-3']/p");
+    public static final By FIFTH_ANSWER = By.xpath(".//div[@id = 'accordion__panel-4']/p");
+    public static final By SIXTH_ANSWER = By.xpath(".//div[@id = 'accordion__panel-5']/p");
+    public static final By SEVENTH_ANSWER = By.xpath(".//div[@id = 'accordion__panel-6']/p");
+    public static final By EIGHTH_ANSWER = By.xpath(".//div[@id = 'accordion__panel-7']/p");
 
     private By orderInTheTopButton = By.xpath(".//button[@class = 'Button_Button__ra12g']");
-    private By orderInTheMiddleButton = By.xpath(".//button[@class = 'Button_Button__ra12g Button_UltraBig__UU3Lp']");
+    private By orderInTheMiddleButton = By.xpath(".//div[@class = 'Home_FinishButton__1_cWm']/button");
 
     public static final String EXPECTED_TEXT_OF_FIRST_ANSWER = "Сутки — 400 рублей. Оплата курьеру — наличными или картой.";
     public static final String EXPECTED_TEXT_OF_SECOND_ANSWER = "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.";
@@ -41,8 +43,15 @@ public class MainPage {
         this.driver = driver;
     }
 
-    public void clickCookie() {
+    public MainPage clickCookie() {
         driver.findElement(cookieYes).click();
+        return this;
+    }
+
+
+    public void scrollTillElement(By question) {
+        WebElement element = driver.findElement(question);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public void clickQuestion(By question) {
@@ -54,8 +63,14 @@ public class MainPage {
         return driver.findElement(answer).getText();
     }
 
+    public OrderPage clickOnBothOrderButtons (String startingOrderButton) {
+        driver.findElement(By.xpath(startingOrderButton)).click();
+        return new OrderPage(driver);
+    }
+
     public void clickOnOrderButtonInTheTop () {
         driver.findElement(orderInTheTopButton).click();
+
     }
 
     public void clickOnOrderButtonInTheMiddle () {
