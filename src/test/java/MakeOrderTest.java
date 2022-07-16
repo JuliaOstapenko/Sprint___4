@@ -38,12 +38,12 @@ public class MakeOrderTest extends BaseOfTest {
     @Parameterized.Parameters
     public static Object[][] getData() {
         return new Object[][] {
-                {".//button[@class = 'Button_Button__ra12g']", "Варвара", "Мешанина", "Москва, улица Товарная 24",
-                ".//ul/li[@data-value = '2']", "88005553535", "15.07.2022",
-                ".//div[text() = 'трое суток']", "black", "Хочу красивый"},
-                {".//div[@class = 'Home_FinishButton__1_cWm']/button",
-                        "Машуня", "Калинина", "Москва, улица Беговая 118", ".//ul/li[@data-value = '9']",
-                        "89782223333", "15.06.2022", ".//div[text() = 'семеро суток']", "grey", "Могу только после шести"}
+                {MainPage.ORDER_IN_THE_TOP_BUTTON_SELECTOR, "Варвара", "Мешанина", "Москва, улица Товарная 24",
+                OrderPage.STATION_CHERKIZOVSKAYA, "88005553535", "15.07.2022",
+                OrderPage.THREE_DAYS_OF_RENT, OrderPage.COLOUR_BLACK_PEARL, "Хочу красивый"},
+                {MainPage.ORDER_IN_THE_MIDDLE_BUTTON_SELECTOR, "Машуня", "Калинина", "Москва, улица Беговая 118",
+                        OrderPage.STATION_LUBYANKA, "89782223333", "15.06.2022", OrderPage.SEVEN_DAYS_OF_RENT,
+                        OrderPage.COLOUR_GREY_HOPELESSNESS, "Могу только после шести"}
         };
     }
 

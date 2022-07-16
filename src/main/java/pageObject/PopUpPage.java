@@ -9,7 +9,10 @@ public class PopUpPage {
         this.driver = driver;
     }
 
+    //Кнопка Да
     private By buttonYes = By.xpath(".//button[@class = 'Button_Button__ra12g Button_Middle__1CSJM' and text() = 'Да']");
+
+    //Текст "Заказ оформлен"
     private By textOfPlacedOrder = By.xpath(".//div[@class='Order_ModalHeader__3FDaJ']");
 
     public PopUpPage clickOnButtonYes() {
