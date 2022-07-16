@@ -4,6 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 
 public class MainPage {
@@ -16,54 +20,40 @@ public class MainPage {
     //Адрес главной страницы
     public static final String URL = "https://qa-scooter.praktikum-services.ru/";
 
-    //Вопрос 1: Сколько это стоит?
-    public static final By FIRST_QUESTION = By.id("accordion__heading-0");
 
-    //Вопрос 2: Хочу сразу несколько самокатов
-    public static final By SECOND_QUESTION = By.id("accordion__heading-1");
+//Вопросы о важном. 8 вопросов по порядку
+    private List<String> questions = new ArrayList<>();
+    public void addQuestions() {
+        questions.add("accordion__heading-0");
+        questions.add("accordion__heading-1");
+        questions.add("accordion__heading-2");
+        questions.add("accordion__heading-3");
+        questions.add("accordion__heading-4");
+        questions.add("accordion__heading-5");
+        questions.add("accordion__heading-6");
+        questions.add("accordion__heading-7");
+    }
 
-    //Вопрос 3: Как рассчитывается время аренды?
-    public static final By THIRD_QUESTION = By.id("accordion__heading-2");
+    public List<String> getQuestions() {
+        return questions;
+    }
 
-    //Вопрос 4: Можно ли заказать самокат прямо на сегодня?
-    public static final By FOURTH_QUESTION = By.id("accordion__heading-3");
+    //Коллекция ответов на вопросы, по порядку, 8 штук
+    private List<String> answers = new ArrayList<>();
+    public void addAnswers() {
+        answers.add(".//div[@id = 'accordion__panel-0']/p");
+        answers.add(".//div[@id = 'accordion__panel-1']/p");
+        answers.add(".//div[@id = 'accordion__panel-2']/p");
+        answers.add(".//div[@id = 'accordion__panel-3']/p");
+        answers.add(".//div[@id = 'accordion__panel-4']/p");
+        answers.add(".//div[@id = 'accordion__panel-5']/p");
+        answers.add(".//div[@id = 'accordion__panel-6']/p");
+        answers.add(".//div[@id = 'accordion__panel-7']/p");
+    }
 
-    //Вопрос 5: Можно ли продлить заказ или вернуть самокат раньше?
-    public static final By FIFTH_QUESTION = By.id("accordion__heading-4");
-
-    //Вопрос 6: Вы привозите зарядку вместе с самокатом?
-    public static final By SIXTH_QUESTION = By.id("accordion__heading-5");
-
-    //Вопрос 7: Можно ли отменить заказ?
-    public static final By SEVENTH_QUESTION = By.id("accordion__heading-6");
-
-    //Вопрос 8: Я жизу за МКАДом, привезёте?
-    public static final By EIGHTH_QUESTION = By.id("accordion__heading-7");
-
-    //Ответ на вопрос 1
-    public static final By FIRST_ANSWER = By.xpath(".//div[@id = 'accordion__panel-0']/p");
-
-    //Ответ на вопрос 2
-    public static final By SECOND_ANSWER = By.xpath(".//div[@id = 'accordion__panel-1']/p");
-
-    //Ответ на вопрос 3
-    public static final By THIRD_ANSWER = By.xpath(".//div[@id = 'accordion__panel-2']/p");
-
-    //Ответ на вопрос 4
-    public static final By FOURTH_ANSWER = By.xpath(".//div[@id = 'accordion__panel-3']/p");
-
-    //Ответ на вопрос 5
-    public static final By FIFTH_ANSWER = By.xpath(".//div[@id = 'accordion__panel-4']/p");
-
-    //Ответ на вопрос 6
-    public static final By SIXTH_ANSWER = By.xpath(".//div[@id = 'accordion__panel-5']/p");
-
-    //Ответ на вопрос 7
-    public static final By SEVENTH_ANSWER = By.xpath(".//div[@id = 'accordion__panel-6']/p");
-
-    //Ответ на вопрос 8
-    public static final By EIGHTH_ANSWER = By.xpath(".//div[@id = 'accordion__panel-7']/p");
-
+    public List<String> getAnswers() {
+        return answers;
+    }
 
     //Кнопка "Заказать" в шапке
     private By orderInTheTopButton = By.xpath(".//button[@class = 'Button_Button__ra12g']");
@@ -91,19 +81,17 @@ public class MainPage {
         return this;
     }
 
-
-    public void scrollTillElement(By question) {
-        WebElement element = driver.findElement(question);
+    public void scrollTillElement(String question) {
+        WebElement element = driver.findElement(By.id(question));
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
-    public void clickQuestion(By question) {
-        driver.findElement(question).click();
+    public void clickQuestion(String question) {
+        driver.findElement(By.id(question)).click();
     }
 
-
-    public String getTextOfAnswer(By answer) {
-        return driver.findElement(answer).getText();
+    public String getTextOfAnswer(String answer) {
+        return driver.findElement(By.xpath(answer)).getText();
     }
 
     public OrderPage clickOnBothOrderButtons (String startingOrderButton) {

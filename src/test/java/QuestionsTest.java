@@ -1,100 +1,45 @@
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import pageObject.MainPage;
 import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 
-public class QuestionsTest extends BaseOfTest{
+@RunWith(Parameterized.class)
+public class QuestionsTest extends BaseOfTest {
+    private int i;
+    private String expectedText;
+
+    public QuestionsTest(int i, String expectedText) {
+        this.i = i;
+        this.expectedText = expectedText;
+    }
+
+    @Parameterized.Parameters
+    public static Object[][] getData() {
+        return new Object[][]{
+                {0, MainPage.EXPECTED_TEXT_OF_FIRST_ANSWER},
+                {1, MainPage.EXPECTED_TEXT_OF_SECOND_ANSWER},
+                {2, MainPage.EXPECTED_TEXT_OF_THIRD_ANSWER},
+                {3, MainPage.EXPECTED_TEXT_OF_FOURTH_ANSWER},
+                {4, MainPage.EXPECTED_TEXT_OF_FIFTH_ANSWER},
+                {5, MainPage.EXPECTED_TEXT_OF_SIXTH_ANSWER},
+                {6, MainPage.EXPECTED_TEXT_OF_SEVENTH_ANSWER},
+                {7, MainPage.EXPECTED_TEXT_OF_EIGHTH_ANSWER},
+        };
+}
+
     @Test
     public void clickOnTheFirstQuestionTest() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.addQuestions();
+        mainPage.addAnswers();
 
         driver.get(MainPage.URL);
-        MainPage mainPage = new MainPage(driver);
         mainPage.clickCookie();
-        mainPage.scrollTillElement(MainPage.FIRST_QUESTION);
-        mainPage.clickQuestion(MainPage.FIRST_QUESTION);
-        String actual = mainPage.getTextOfAnswer(MainPage.FIRST_ANSWER);
-        assertEquals(MainPage.EXPECTED_TEXT_OF_FIRST_ANSWER, actual);
+        mainPage.scrollTillElement(mainPage.getQuestions().get(i));
+        mainPage.clickQuestion(mainPage.getQuestions().get(i));
+        String actual = mainPage.getTextOfAnswer(mainPage.getAnswers().get(i));
+        assertEquals(expectedText, actual);
     }
 
-    @Test
-    public void clickOnTheSecondQuestionTest() {
-
-        driver.get(MainPage.URL);
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickCookie();
-        mainPage.scrollTillElement(MainPage.SECOND_QUESTION);
-        mainPage.clickQuestion(MainPage.SECOND_QUESTION);
-        String actual = mainPage.getTextOfAnswer(MainPage.SECOND_ANSWER);
-        assertEquals(MainPage.EXPECTED_TEXT_OF_SECOND_ANSWER, actual);
-    }
-    @Test
-    public void clickOnTheThirdQuestionTest() {
-
-        driver.get(MainPage.URL);
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickCookie();
-        mainPage.scrollTillElement(MainPage.THIRD_QUESTION);
-        mainPage.clickQuestion(MainPage.THIRD_QUESTION);
-        String actual = mainPage.getTextOfAnswer(MainPage.THIRD_ANSWER);
-        assertEquals(MainPage.EXPECTED_TEXT_OF_THIRD_ANSWER, actual);
-    }
-    @Test
-    public void clickOnTheFourthQuestionTest() {
-
-        driver.get(MainPage.URL);
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickCookie();
-        mainPage.scrollTillElement(MainPage.FOURTH_QUESTION);
-        mainPage.clickQuestion(MainPage.FOURTH_QUESTION);
-        String actual = mainPage.getTextOfAnswer(MainPage.FOURTH_ANSWER);
-        assertEquals(MainPage.EXPECTED_TEXT_OF_FOURTH_ANSWER, actual);
-    }
-
-    @Test
-    public void clickOnTheFifthQuestionTest() {
-
-        driver.get(MainPage.URL);
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickCookie();
-        mainPage.scrollTillElement(MainPage.FIFTH_QUESTION);
-        mainPage.clickQuestion(MainPage.FIFTH_QUESTION);
-        String actual = mainPage.getTextOfAnswer(MainPage.FIFTH_ANSWER);
-        assertEquals(MainPage.EXPECTED_TEXT_OF_FIFTH_ANSWER, actual);
-    }
-
-    @Test
-    public void clickOnTheSixthQuestionTest() {
-
-        driver.get(MainPage.URL);
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickCookie();
-        mainPage.scrollTillElement(MainPage.SIXTH_QUESTION);
-        mainPage.clickQuestion(MainPage.SIXTH_QUESTION);
-        String actual = mainPage.getTextOfAnswer(MainPage.SIXTH_ANSWER);
-        assertEquals(MainPage.EXPECTED_TEXT_OF_SIXTH_ANSWER, actual);
-    }
-
-    @Test
-    public void clickOnTheSeventhQuestionTest() {
-
-        driver.get(MainPage.URL);
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickCookie();
-        mainPage.scrollTillElement(MainPage.SEVENTH_QUESTION);
-        mainPage.clickQuestion(MainPage.SEVENTH_QUESTION);
-        String actual = mainPage.getTextOfAnswer(MainPage.SEVENTH_ANSWER);
-        assertEquals(MainPage.EXPECTED_TEXT_OF_SEVENTH_ANSWER, actual);
-    }
-
-    @Test
-    public void clickOnTheEighthQuestionTest() {
-
-        driver.get(MainPage.URL);
-        MainPage mainPage = new MainPage(driver);
-        mainPage.clickCookie();
-        mainPage.scrollTillElement(MainPage.EIGHTH_QUESTION);
-        mainPage.clickQuestion(MainPage.EIGHTH_QUESTION);
-        String actual = mainPage.getTextOfAnswer(MainPage.EIGHTH_ANSWER);
-        assertEquals(MainPage.EXPECTED_TEXT_OF_EIGHTH_ANSWER, actual);
-    }
 }
